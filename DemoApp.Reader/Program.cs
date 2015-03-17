@@ -7,24 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SharePoint.Client;
 
-namespace DemoApp
+namespace DemoApp.Reader
 {
     class Program
     {
         static void Main(string[] args)
         {
             ReadSettings();
+
             using (ClientContext ctx = GetAuthenticatedContext())
             {
-                TraceHelper.TraceInformation(ConsoleColor.Magenta, "test");
+                TraceHelper.TraceInformation(ConsoleColor.Magenta, "reading related items");
 
-                //ctx.Load(ctx.Web, x=>x.Url);
-                //ctx.ExecuteQuery();
-                //Console.WriteLine(ctx.Web.Url);
             }
 
         }
 
+
+
+
+        #region support code
         static bool sharepointonline;
 
         private static bool ReadSettings()
@@ -90,9 +92,8 @@ namespace DemoApp
 
 
         #endregion
-
-
+        #endregion
 
     }
-}
 
+}

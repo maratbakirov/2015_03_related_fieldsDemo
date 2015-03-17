@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A78AB30-6285-4342-B8F8-D2B9C1D0AD64}</ProjectGuid>
+    <ProjectGuid>{17F64A96-2D65-44C2-B70A-D93B63B26C55}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DemoApp</RootNamespace>
-    <AssemblyName>DemoApp</AssemblyName>
+    <RootNamespace>DemoApp.Reader</RootNamespace>
+    <AssemblyName>DemoApp.Reader</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,26 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="SPMeta2">
-      <HintPath>..\packages\SPMeta2.Core.1.1.70\lib\net45\SPMeta2.dll</HintPath>
-    </Reference>
-    <Reference Include="SPMeta2.CSOM">
-      <HintPath>..\packages\SPMeta2.CSOM.Foundation-v16.1.1.70\lib\net45\SPMeta2.CSOM.dll</HintPath>
-    </Reference>
-    <Reference Include="SPMeta2.CSOM.Behaviours">
-      <HintPath>..\packages\SPMeta2.CSOM.Foundation-v16.1.1.70\lib\net45\SPMeta2.CSOM.Behaviours.dll</HintPath>
-    </Reference>
-    <Reference Include="SPMeta2.Syntax.Default">
-      <HintPath>..\packages\SPMeta2.Core.1.1.70\lib\net45\SPMeta2.Syntax.Default.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -64,11 +46,15 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TraceHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DemoApp.Model\DemoApp.Model.csproj">
+      <Project>{4e9a608a-c638-427e-9fd9-8e7f24e8d06c}</Project>
+      <Name>DemoApp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

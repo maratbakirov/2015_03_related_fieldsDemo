@@ -6,6 +6,12 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SharePoint.Client;
+using DemoApp.Model;
+using Newtonsoft.Json;
+using SPMeta2.CSOM.DefaultSyntax;
+using SPMeta2.CSOM.Utils;
+using SPMeta2.Enumerations;
+using SPMeta2.Syntax.Default;
 
 namespace DemoApp.Reader
 {
@@ -18,6 +24,38 @@ namespace DemoApp.Reader
             using (ClientContext ctx = GetAuthenticatedContext())
             {
                 TraceHelper.TraceInformation(ConsoleColor.Magenta, "reading related items");
+
+                ctx.Load(ctx.Web, x=>x.ServerRelativeUrl);
+                ctx.ExecuteQuery();
+
+                var workflowTasksListUrl = UrlUtility.CombineUrl(ctx.Web.ServerRelativeUrl, Lists.WorkflowTasks.GetListUrl());
+                var workflowTasksLIst = ctx.Web.GetList(workflowTasksListUrl);
+
+                // this is just for demo, this is not the best code to work with sharpeoint items
+                var items = workflowTasksLIst.GetItems(
+                    new CamlQuery()
+                    );
+
+                ctx.Load(items);
+
+                ctx.ExecuteQuery();
+
+                string relatedItemsString = (string)items[0][BuiltInInternalFieldNames.RelatedItems];
+
+                dynamic decodedRelatedItems = JsonConvert.DeserializeObject(relatedItemsString);
+                foreach (var item in decodedRelatedItems)
+                {
+                    int itemId = int.Parse(item.ItemId.ToString());
+                    var listId = new Guid(string.Format("{{{0}}}", item.ListId.ToString()));
+                    var webId = new Guid(string.Format("{{{0}}}", item.WebId.ToString()));
+
+                    Console.WriteLine("Found an item from web {0}, list {1}, itemid:{2}",webId,listId,itemId);
+                    
+                }
+
+
+
+
 
             }
 
